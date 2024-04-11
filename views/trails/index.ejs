@@ -5,5 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trails</title>
   </head>
-  <body></body>
+  <body>
+    <h1>All Trails</h1>
+    <div><a href="/trails/new">Add Trail</a></div>
+    <ul>
+      <% for (let trail of trails) { %>
+        <li><a href="/trails/<%= trail._id %>"><%= trail.title %></a></li>
+        <% } %>
+    </ul>
+  </body>
 </html>
