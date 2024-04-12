@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Show</title>
-  </head>
-  <body>
-    <h1><%= trail.title %></h1>
+   <% layout('layouts/boilerplate') %>
+   <h1><%= trail.title %></h1>
     <h2><%= trail.location %></h2>
     <p>
       <a href="/trails/<%= trail._id %>/edit">Edit</a>
@@ -20,5 +13,3 @@
     <footer>
       <a href="/trails">All Trails</a>
     </footer>
-  </body>
-</html>
