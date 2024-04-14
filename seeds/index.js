@@ -20,6 +20,9 @@ const seedDB = async () => {
     const trail = new Trail({
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      image: "https://source.unsplash.com/collection/9326439",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, consequatur provident, eaque id esse corporis reiciendis veniam vitae cumque explicabo dolor quam ullam nulla odit debitis accusamus, sequi odio iusto!",
     });
     await trail.save();
   }
