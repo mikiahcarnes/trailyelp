@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 module.exports.trailSchema = Joi.object({
-  campground: Joi.object({
+  trail: Joi.object({
     title: Joi.string().required(),
     image: Joi.string().required(),
     location: Joi.string().required(),
