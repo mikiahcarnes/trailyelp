@@ -18,6 +18,14 @@
         <a class="nav-link" href="/trails">Trails</a>
         <a class="nav-link" href="/trails/new">New Trail</a>
       </div>
+      <div class="navbar-nav ms-auto">
+        <% if (!currentUser) {%>
+        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/register">Register</a>
+        <% } else {%>
+        <a class="nav-link" href="/Logout">Logout</a>
+        <% } %>
+      </div>
     </div>
   </div>
 </nav>

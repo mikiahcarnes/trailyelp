@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const CatchAsync = require("../utils/CatchAsync");
+const CatchAsync = require("../utils/catchAsync");
 const { trailSchema } = require("../schemas.js");
+const { isLoggedIn } = require("../middleware");
 const ExpressError = require("../utils/ExpressError");
 const Trail = require("../models/trail");
 
@@ -23,12 +24,13 @@ router.get(
   })
 );
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("trails/new");
 });
 
 router.post(
   "/",
+  isLoggedIn,
   CatchAsync(async (req, res) => {
     const trail = new Trail(req.body.trail);
     await trail.save();
@@ -51,6 +53,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  isLoggedIn,
   CatchAsync(async (req, res) => {
     const trail = await Trail.findById(req.params.id);
     if (!trail) {
@@ -63,6 +66,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateTrail,
   CatchAsync(async (req, res) => {
     const { id } = req.params;
@@ -74,6 +78,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   CatchAsync(async (req, res) => {
     const { id } = req.params;
     await Trail.findByIdAndDelete(id);

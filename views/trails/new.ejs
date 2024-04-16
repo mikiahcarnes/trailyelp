@@ -1,55 +1,51 @@
-<% layout('layouts/boilerplate') %>
-
+<% layout('layouts/boilerplate')%>
 <div class="row">
   <h1 class="text-center">New Trail</h1>
   <div class="col-6 offset-3">
     <form action="/trails" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
-        <input class="form-control" type="text" name="trail[title]" id="name" required />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="trail[title]"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
         <input
           class="form-control"
           type="text"
-          name="trail[location]"
           id="location"
+          name="trail[location]"
           required
         />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image Url</label>
         <input
           class="form-control"
           type="text"
-          name="trail[image]"
           id="image"
+          name="trail[image]"
           required
         />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
         <textarea
           class="form-control"
           type="text"
-          name="trail[description]"
           id="description"
+          name="trail[description]"
           required
         ></textarea>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Add Trail</button>
@@ -58,4 +54,3 @@
     <a href="/trails">All Trails</a>
   </div>
 </div>
-
