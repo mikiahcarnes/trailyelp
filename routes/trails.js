@@ -1,20 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const CatchAsync = require("../utils/catchAsync");
-const { trailSchema } = require("../schemas.js");
-const { isLoggedIn } = require("../middleware");
-const ExpressError = require("../utils/ExpressError");
-const Trail = require("../models/trail");
+const { isLoggedIn, isAuthor, validateTrail } = require("../middleware");
 
-const validateTrail = (req, res, next) => {
-  const { error } = trailSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
+const Trail = require("../models/trail");
 
 router.get(
   "/",
@@ -33,6 +22,7 @@ router.post(
   isLoggedIn,
   CatchAsync(async (req, res) => {
     const trail = new Trail(req.body.trail);
+    trail.author = req.user._id;
     await trail.save();
     req.flash("success", "Successfully made a new trail!");
     res.redirect(`/trails/${trail._id}`);
@@ -42,7 +32,14 @@ router.post(
 router.get(
   "/:id",
   CatchAsync(async (req, res) => {
-    const trail = await Trail.findById(req.params.id).populate("reviews");
+    const trail = await Trail.findById(req.params.id)
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      })
+      .populate("author");
     if (!trail) {
       req.flash("error", "Cannot find that trail!");
       return res.redirect("/trails");
@@ -54,8 +51,10 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isAuthor,
   CatchAsync(async (req, res) => {
-    const trail = await Trail.findById(req.params.id);
+    const { id } = req.params;
+    const trail = await Trail.findById(id);
     if (!trail) {
       req.flash("error", "Cannot find that trail!");
       return res.redirect("/trails");
@@ -67,6 +66,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isAuthor,
   validateTrail,
   CatchAsync(async (req, res) => {
     const { id } = req.params;

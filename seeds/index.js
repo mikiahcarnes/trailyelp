@@ -18,6 +18,7 @@ const seedDB = async () => {
   for (let i = 0; i < 51; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const trail = new Trail({
+      author: "661e47a4071fb9150453a004",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: "https://source.unsplash.com/collection/9326439",
