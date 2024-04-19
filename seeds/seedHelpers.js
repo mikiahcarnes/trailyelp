@@ -27,7 +27,7 @@ module.exports.places = [
   "Group Trail",
   "Horse Trail",
   "Ghost Town",
-  "Camp",
+  "Trail",
   "Dispersed Trail",
   "Backcountry",
   "River",
