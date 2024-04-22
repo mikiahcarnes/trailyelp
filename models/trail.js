@@ -2,9 +2,22 @@ const mongoose = require("mongoose");
 const review = require("./review");
 const { Schema } = mongoose;
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200");
+});
+
+// ImageSchema.virtual("cardImage").get(function () {
+//   return this.url.replace("/upload", "/upload/ar_16:9,c_crop");
+// });
+
 const TrailSchema = new Schema({
   title: String,
-  image: String,
+  images: [ImageSchema],
   description: String,
   location: String,
   author: {

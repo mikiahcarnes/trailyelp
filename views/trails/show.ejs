@@ -2,8 +2,38 @@
 <link rel="stylesheet" href="/stylesheets/stars.css" />
 <div class="row">
   <div class="col-6">
+    <div id="trailCarousel" class="carousel slide" data-bs-interval="false">
+      <div class="carousel-inner">
+        <% trail.images.forEach((img, i) => { %>
+        <div class="carousel-item <%= i === 0 ? 'active': '' %>">
+          <img src="<%= img.url %>" class="d-block w-100" alt="" />
+        </div>
+        <% }) %>
+      </div>
+      <% if(trail.images.length > 1) { %>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#trailCarousel"
+        data-bs-slide="prev"
+        data-bs-interval="false"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#trailCarousel"
+        data-bs-slide="next"
+        data-bs-interval="false"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
     <div class="card mb-3">
-      <img src="<%= trail.image%>" class="card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title"><%= trail.title%></h5>
         <p class="card-text"><%= trail.description%></p>

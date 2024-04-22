@@ -1,12 +1,14 @@
 const Joi = require("joi");
+const { number } = require("joi");
 
 module.exports.trailSchema = Joi.object({
   trail: Joi.object({
     title: Joi.string().required(),
-    image: Joi.string().required(),
+    image: Joi.string().optional(),
     location: Joi.string().required(),
     description: Joi.string().required(),
   }).required(),
+  deleteImages: Joi.array(),
 });
 
 module.exports.reviewSchema = Joi.object({

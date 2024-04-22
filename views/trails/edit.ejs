@@ -2,7 +2,13 @@
 <div class="row">
   <h1 class="text-center">Edit Trail</h1>
   <div class="col-6 offset-3">
-    <form action="/trails/<%=trail._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+    <form
+      action="/trails/<%=trail._id%>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -13,9 +19,7 @@
           required
           id="name"
         />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -27,24 +31,7 @@
           required
           id="location"
         />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="image">Image Url</label>
-        <input
-          class="form-control"
-          type="text"
-          name="trail[image]"
-          value="<%=trail.image%>"
-          required
-          id="image"
-        />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
@@ -54,19 +41,49 @@
           name="trail[description]"
           required
           id="description"
-          style="height: 300px"
+          style="height: 150px"
         >
               <%=trail.description%>
             </textarea
         >
-        <div class="valid-feedback">
-          Looks good!
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Add image(s)</label>
+        <input
+          class="form-control"
+          type="file"
+          id="image"
+          name="image"
+          multiple
+        />
+      </div>
+      <h5>Delete Images</h5>
+      <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+        <% trail.images.forEach((image, i) => { %>
+        <div class="col">
+          <div class="card">
+            <img class="card-img" src="<%= image.thumbnail %>" alt="" />
+            <div class="card-img-overlay text-end pt-1 pe-2">
+              <label class="visually-hidden" for="image-<%= i %>"
+                >Delete Image</label
+              >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="deleteImages[]"
+                value="<%= image.filename %>"
+                id="image-<%= i %>"
+              />
+            </div>
+          </div>
         </div>
+        <% }) %>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Trail</button>
+        <a class="btn btn-danger" href="/trails/<%= trail._id %>">Cancel</a>
       </div>
     </form>
-    <a href="/trails/<%= trail._id %>">Back To Trail</a>
   </div>
 </div>
