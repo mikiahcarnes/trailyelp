@@ -15,20 +15,31 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await Trail.deleteMany({});
-  for (let i = 0; i < 51; i++) {
+  for (let i = 0; i < 400; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const trail = new Trail({
       author: "661e47a4071fb9150453a004",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      geometry: {
+        type: "Point",
+        coordinates: [
+          cities[random1000].longitude,
+          cities[random1000].latitude,
+        ],
+      },
       images: [
         {
-          url: "https://res.cloudinary.com/dkj1iald3/image/upload/v1713769840/TrailYelp/ageztxqbzvtejnumdrhs.jpg",
-          filename: "TrailYelp/ageztxqbzvtejnumdrhs",
+          url: "https://res.cloudinary.com/dkj1iald3/image/upload/v1713847598/TrailYelp/hjgv1dzdej9ygrtxyfip.jpg",
+          filename: "TrailYelp/hjgv1dzdej9ygrtxyfip",
         },
         {
-          url: "https://res.cloudinary.com/dkj1iald3/image/upload/v1713769841/TrailYelp/dxq0p4hdotltnqcoh1sv.jpg",
-          filename: "TrailYelp/dxq0p4hdotltnqcoh1sv",
+          url: "https://res.cloudinary.com/dkj1iald3/image/upload/v1713847600/TrailYelp/kaohgngdzpi0hpfggtsc.jpg",
+          filename: "TrailYelp/kaohgngdzpi0hpfggtsc",
+        },
+        {
+          url: "https://res.cloudinary.com/dkj1iald3/image/upload/v1713847599/TrailYelp/hywq05st48ldu4r27eri.jpg",
+          filename: "TrailYelp/hywq05st48ldu4r27eri",
         },
       ],
       description:

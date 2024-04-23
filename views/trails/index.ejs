@@ -1,5 +1,5 @@
 <% layout('layouts/boilerplate') %>
-
+<div id="map" style="width: 100%; height: 500px"></div>
 <h1>All Trails</h1>
 <div></div>
 <% for (let trail of trails) { %>
@@ -9,12 +9,17 @@
       <% if(trail.images && trail.images.length > 0) { %>
       <img class="img-fluid" src="<%= trail.images[0].url %>" />
       <% } else { %>
-      <img class="img-fluid" src="" alt="" />
+      <img
+        class="img-fluid"
+        src="https://res.cloudinary.com/dkj1iald3/image/upload/v1713847600/TrailYelp/kaohgngdzpi0hpfggtsc.jpg"
+        alt="default trail image"
+      />
       <% } %>
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title"><%= trail.title %></h5>
+
         <p class="card-text"><%= trail.description %></p>
         <p class="card-text">
           <small class="text-muted"><%= trail.location %></small>
@@ -27,3 +32,10 @@
   </div>
 </div>
 <% } %>
+
+<script>
+  const mapBoxToken = "<%- process.env.MAPBOX_TOKEN %>";
+  const trails = {features: <%- JSON.stringify(trails) %>}
+</script>
+
+<script src="/javascripts/clustermap.js"></script>

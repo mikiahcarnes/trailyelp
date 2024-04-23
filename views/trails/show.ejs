@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/stars.css" />
 <div class="row">
   <div class="col-6">
+    <div id="map" style="width: 400px; height: 300px"></div>
     <div id="trailCarousel" class="carousel slide" data-bs-interval="false">
       <div class="carousel-inner">
         <% trail.images.forEach((img, i) => { %>
@@ -156,3 +157,9 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  const mapBoxToken = "<%- process.env.MAPBOX_TOKEN %>";
+  const trail = <%- JSON.stringify(trail) %>;
+</script>
+<script src="/javascripts/showpageMap.js"></script>

@@ -15,21 +15,42 @@ ImageSchema.virtual("thumbnail").get(function () {
 //   return this.url.replace("/upload", "/upload/ar_16:9,c_crop");
 // });
 
-const TrailSchema = new Schema({
-  title: String,
-  images: [ImageSchema],
-  description: String,
-  location: String,
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
+const opts = { toJSON: { virtuals: true } };
+
+const TrailSchema = new Schema(
+  {
+    title: String,
+    images: [ImageSchema],
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
-  ],
+    description: String,
+    location: String,
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+  },
+  opts
+);
+
+TrailSchema.virtual("properties.popUpMarkup").get(function () {
+  return `<strong><a href="/trails/${this._id}">${this.title}</a></strong>
+          <p>${this.description.substring(0, 20)}...</p>`;
 });
 
 TrailSchema.post("findOneAndDelete", async function (doc) {
