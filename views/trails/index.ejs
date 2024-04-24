@@ -7,9 +7,14 @@
   <div class="row">
     <div class="col-md-4">
       <% if(trail.images && trail.images.length > 0) { %>
-      <img class="img-fluid" src="<%= trail.images[0].url %>" />
+      <img
+        crossorigin="anonymous"
+        class="img-fluid"
+        src="<%= trail.images[0].url %>"
+      />
       <% } else { %>
       <img
+        crossorigin="anonymous"
         class="img-fluid"
         src="https://res.cloudinary.com/dkj1iald3/image/upload/v1713847600/TrailYelp/kaohgngdzpi0hpfggtsc.jpg"
         alt="default trail image"
@@ -38,4 +43,4 @@
   const trails = {features: <%- JSON.stringify(trails) %>}
 </script>
 
-<script src="/javascripts/clustermap.js"></script>
+<script crossorigin="anonymous" src="/javascripts/clustermap.js"></script>
