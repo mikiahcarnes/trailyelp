@@ -1,7 +1,7 @@
 mapboxgl.accessToken = mapBoxToken;
 const map = new mapboxgl.Map({
   container: "map", // container ID
-  style: "mapbox://styles/mapbox/light-v11", // style URL
+  style: "mapbox://styles/mapbox/outdoors-v12", // style URL
   center: trail.geometry.coordinates, // starting position [lng, lat]
   zoom: 9, // starting zoom
 });
