@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const catchAsync = require("../utils/catchAsync");
+const CatchAsync = require("../utils/catchAsync");
 const User = require("../models/user");
 const users = require("../controllers/users");
 const { storeReturnTo } = require("../middleware");
@@ -9,7 +9,7 @@ const passport = require("passport");
 router
   .route("/register")
   .get(users.renderRegister)
-  .post(catchAsync(users.register));
+  .post(CatchAsync(users.register));
 
 router
   .route("/login")
