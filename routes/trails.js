@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const trails = require("../controllers/trails");
-const catchAsync = require("./utils/catchAsync");
+const catchAsync = require("../utils/catchAsync.js");
 const { isLoggedIn, isAuthor, validateTrail } = require("../middleware");
 const multer = require("multer");
 const { storage } = require("../cloudinary");
